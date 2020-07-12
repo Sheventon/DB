@@ -26,8 +26,6 @@ public class StudentsRepositoryJdbcImpl implements StudentsRepository {
             " from mentor m full outer join student s on m.student_id = s.id";
     private static final String SQL_INSERT_STUDENT = "insert into student (first_name, last_name, age, group_number)" +
             "values (?, ?, ?, ?)";
-    private static final String SQL_INSERT_MENTOR = "insert into mentor (first_name, last_name, subject_id, student_id" +
-            "values (?, ?, ?, ?)";
     private static final String SQL_UPDATE_STUDENT = "update student set " +
             "first_name = '%s', " +
             "last_name = '%s', " +
@@ -188,25 +186,6 @@ public class StudentsRepositoryJdbcImpl implements StudentsRepository {
                     System.out.println(ex.getMessage());
                 }
             }
-/*
-            List<Mentor> mentors = entity.getMentors();
-            for (Mentor mentor : mentors) {
-                String insertMentorStatement = String.format(SQL_INSERT_MENTOR,
-                        mentor.getFirstName(),
-                        mentor.getLastName(),
-                        mentor.getSubjectId(),
-                        mentor.getStudent(),
-                        Statement.RETURN_GENERATED_KEYS);
-                statement.executeUpdate(insertMentorStatement);
-                try (ResultSet resultSet = statement.getGeneratedKeys()) {
-                    if (resultSet.next()) {
-                        long m_id = resultSet.getInt(1);
-                        mentor.setId(m_id);
-                    }
-                }
-            }
-
- */
         } catch (SQLException e) {
             throw new IllegalArgumentException(e);
         } finally {
